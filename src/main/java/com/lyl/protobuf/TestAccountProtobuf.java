@@ -2,25 +2,29 @@ package com.lyl.protobuf;
 
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.util.JsonFormat;
+import io.protostuff.LinkedBuffer;
+import io.protostuff.ProtostuffIOUtil;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import sun.security.pkcs11.Secmod;
+
+import javax.xml.validation.Schema;
 
 public class TestAccountProtobuf {
 
     public static void main(String[] args) throws InvalidProtocolBufferException {
-        long st = System.currentTimeMillis();
-        for (int i = 0; i< 10000000; i++){
-            test1();
-        }
-        System.out.println("时间：" + (System.currentTimeMillis() - st));
-        long st1 = System.currentTimeMillis();
-        for (int i = 0; i< 10000000; i++){
-            test2();
-        }
-        System.out.println("时间：" + (System.currentTimeMillis() - st1));
+//        long st = System.currentTimeMillis();
+//        for (int i = 0; i< 10000000; i++){
+//            test1();
+//        }
+//        System.out.println("时间：" + (System.currentTimeMillis() - st));
+//        long st1 = System.currentTimeMillis();
+//        for (int i = 0; i< 10000000; i++){
+//            test2();
+//        }
+//        System.out.println("时间：" + (System.currentTimeMillis() - st1));
+        test2();
+        test2();
+        test2();
     }
 
     private static void test1() throws InvalidProtocolBufferException {
@@ -34,7 +38,7 @@ public class TestAccountProtobuf {
         gps_builder.setId(100L);
         DataProto.data data = gps_builder.build();
 //        DataProto.data dp = DataProto.data.parseFrom(data.toByteArray());
-        KafkaSender.getInstance().send(new ProducerRecord<String, byte[]>(Config.Kafka.TOPIC, data.toByteArray()));
+//        KafkaSender.getInstance().send(new ProducerRecord<String, byte[]>(Config.Kafka.TOPIC, data.toByteArray()));
     }
 
     private static void test2(){
@@ -46,8 +50,10 @@ public class TestAccountProtobuf {
         d.setLon(120.112);
         d.setDirection(30.2F);
         d.setId(100L);
-        String s = JSON.toJSONString(d);
-        Data data = JSON.parseObject(s, Data.class);
+//        String s = JSON.toJSONString(d);
+//        Data data = JSON.parseObject(s, Data.class);
+
+        KafkaSender.getInstance().send(new ProducerRecord<String, Data>(Config.Kafka.TOPIC, d));
     }
 
 }

@@ -38,8 +38,14 @@ public class Config {
         public static int BATCH_SIZE = 65535;
         public static int LINGER_MS = 2000;
         public static int BUFFER_MEMORY = 33554432;
-        public static String KEY_SERIALIZER = "org.apache.kafka.common.serialization.StringSerializer";
-        public static String VALUE_SERIALIZER = "org.apache.kafka.common.serialization.StringSerializer";
+//        public static String KEY_SERIALIZER = "org.apache.kafka.common.serialization.StringSerializer";
+        public static String KEY_SERIALIZER = "com.lyl.protobuf.DemoSerialize";
+//        public static String VALUE_SERIALIZER = "org.apache.kafka.common.serialization.StringSerializer";
+        public static String VALUE_SERIALIZER = "com.lyl.protobuf.DemoSerialize";
+        public static String KEY_DESERIALIZER = "com.lyl.protobuf.DemoDeserialize";
+        public static String VALUE_DESERIALIZER = "com.lyl.protobuf.DemoDeserialize";
+
+
     }
 
     public static class Agent {

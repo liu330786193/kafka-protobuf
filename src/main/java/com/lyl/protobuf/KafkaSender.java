@@ -2,6 +2,7 @@ package com.lyl.protobuf;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
@@ -23,6 +24,8 @@ public class KafkaSender {
 //        properties.put("compression.type", "snappy");
         properties.put("key.serializer", Config.Kafka.KEY_SERIALIZER);
         properties.put("value.serializer", Config.Kafka.VALUE_SERIALIZER);
+        properties.put("key.deserializer", Config.Kafka.KEY_DESERIALIZER);
+        properties.put("value.deserializer", Config.Kafka.VALUE_DESERIALIZER);
         this.producer = new KafkaProducer<String, String>(properties);
     }
 
